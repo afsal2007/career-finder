@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pathfinder — Find Your Career Direction</title>
+
+  <!-- Google Fonts: Space Grotesk (display), Inter (body), JetBrains Mono (data/tags) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+  <!-- Separate stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="logo">
+      <span class="logo-dot"></span>
+      Pathfinder
+    </div>
+    <p class="topbar-tag">No degree required — every answer plots your route</p>
+  </header>
+
+  <main class="quiz-wrap">
+
+    <!-- Route line: visual trail of the path taken so far -->
+    <aside class="route-rail" id="route-rail" aria-hidden="true"></aside>
+
+    <section class="quiz-panel">
+
+      <div class="trail" id="trail"></div>
+
+      <div class="quiz-box" id="quiz-box">
+        <div class="q-meta">
+          <span class="q-number" id="q-number">QUESTION 1</span>
+          <span class="q-total">/ 16</span>
+        </div>
+
+        <h1 id="question-text">Loading…</h1>
+
+        <div id="options-container" class="options-container"></div>
+
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <p class="progress-label" id="progress-label">1 of 16</p>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Separate JS file -->
+  <script src="script.js"></script>
+</body>
+</html>

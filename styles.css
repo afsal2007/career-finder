@@ -1,0 +1,395 @@
+
+:root {
+  --ink: #0b1437;
+  --ink-soft: #1c2a5e;
+  --blue: #1659e8;
+  --blue-bright: #3d7bff;
+  --paper: #ffffff;
+  --panel-tint: #eaf0ff;
+  --slate: #5c6b8a;
+  --line: #d7e0f7;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------------- TOP BAR ---------------- */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 40px;
+  border-bottom: 1px solid var(--line);
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.logo-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 0 4px var(--panel-tint);
+}
+
+.topbar-tag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--slate);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 640px) {
+  .topbar-tag { display: none; }
+}
+
+/* ---------------- LAYOUT ---------------- */
+
+.quiz-wrap {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 56px 24px 90px;
+  gap: 0;
+}
+
+/* ---------------- SIGNATURE: ROUTE RAIL ---------------- */
+/* A vertical line with nodes that fill in as the user progresses.
+   Visualizes "your path is being plotted" literally. */
+
+.route-rail {
+  position: relative;
+  width: 56px;
+}
+
+.route-rail::before {
+  content: "";
+  position: absolute;
+  left: 27px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: var(--line);
+}
+
+.route-rail .rail-fill {
+  position: absolute;
+  left: 27px;
+  top: 6px;
+  width: 2px;
+  background: var(--blue);
+  transition: height 0.4s ease;
+}
+
+.route-rail .rail-node {
+  position: absolute;
+  left: 21px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--line);
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.route-rail .rail-node.active {
+  border-color: var(--blue);
+  background: var(--blue);
+  box-shadow: 0 0 0 4px var(--panel-tint);
+}
+
+@media (max-width: 640px) {
+  .quiz-wrap { grid-template-columns: 1fr; }
+  .route-rail { display: none; }
+}
+
+/* ---------------- TRAIL (breadcrumb of choices) ---------------- */
+
+.trail {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-height: 24px;
+  margin-bottom: 18px;
+}
+
+.trail-step {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: var(--panel-tint);
+  color: var(--blue);
+  border: 1px solid var(--line);
+}
+
+/* ---------------- QUIZ PANEL ---------------- */
+
+.quiz-panel {
+  min-width: 0;
+}
+
+.quiz-box {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 40px;
+  box-shadow: 0 1px 2px rgba(11, 20, 55, 0.04);
+}
+
+.q-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.q-number {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--blue);
+}
+
+.q-total {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--slate);
+}
+
+#question-text {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin: 0 0 28px;
+  color: var(--ink);
+}
+
+/* ---------------- OPTIONS ---------------- */
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option-btn {
+  font-family: var(--font-body);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 16px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+
+.option-btn .letter {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--slate);
+  border: 1.5px solid var(--line);
+  border-radius: 6px;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.option-btn:hover {
+  border-color: var(--blue);
+  background: var(--panel-tint);
+  transform: translateX(3px);
+}
+
+.option-btn:hover .letter {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: var(--paper);
+}
+
+.option-btn:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* ---------------- PROGRESS ---------------- */
+
+.progress-track {
+  margin-top: 30px;
+  height: 4px;
+  background: var(--panel-tint);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 6%;
+  background: var(--blue);
+  border-radius: 100px;
+  transition: width 0.35s ease;
+}
+
+.progress-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--slate);
+  margin: 10px 0 0;
+  letter-spacing: 0.02em;
+}
+
+/* ---------------- RESULT SCREEN ---------------- */
+
+.result-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 10px;
+}
+
+.result-box h2 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 18px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.result-box p.explain {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin-bottom: 28px;
+}
+
+.role-list {
+  list-style: none;
+  margin: 0 0 30px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.role-list li {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 15px;
+  padding: 14px 18px;
+  background: var(--panel-tint);
+  border-radius: 10px;
+  border-left: 3px solid var(--blue);
+  color: var(--ink);
+}
+
+.score-breakdown {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--slate);
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+  margin-bottom: 28px;
+}
+
+.score-breakdown .row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.score-breakdown .row .bar-bg {
+  flex: 1;
+  margin: 0 12px;
+  height: 4px;
+  background: var(--panel-tint);
+  border-radius: 100px;
+  position: relative;
+  top: 7px;
+  overflow: hidden;
+}
+
+.score-breakdown .row .bar-fill {
+  height: 100%;
+  background: var(--blue-bright);
+  border-radius: 100px;
+}
+
+#restart-btn {
+  font-family: var(--font-display);
+  padding: 14px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border: none;
+  border-radius: 10px;
+  background: var(--ink);
+  color: var(--paper);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+#restart-btn:hover {
+  background: var(--blue);
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-width: 640px) {
+  .quiz-box { padding: 28px 22px; border-radius: 12px; }
+  #question-text { font-size: 22px; }
+  .topbar { padding: 18px 20px; }
+}
+
+/* ---------------- REDUCED MOTION ---------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .option-btn, .progress-fill, .rail-fill, .rail-node {
+    transition: none;
+  }
+}
